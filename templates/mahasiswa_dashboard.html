@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Mahasiswa</title>
+    <style>body { font-family: sans-serif; } .container { max-width: 800px; margin: 20px auto; } table { width: 100%; border-collapse: collapse; margin-top: 20px; } th, td { border: 1px solid #ddd; padding: 8px; text-align: left; } th { background-color: #f2f2f2; } button { padding: 5px 10px; cursor: pointer; }</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Selamat Datang, {{.User.Nama}}!</h1>
+        <a href="/logout">Logout</a>
+
+        <h2>Mata Kuliah Yang Ditawarkan</h2>
+        <table>
+            <thead>
+                <tr><th>Kode MK</th><th>Nama Mata Kuliah</th><th>SKS</th><th>Kuota</th><th>Aksi</th></tr>
+            </thead>
+            <tbody>
+                {{range .AllCourses}}
+                <tr>
+                    <td>{{.KodeMK}}</td>
+                    <td>{{.NamaMK}}</td>
+                    <td>{{.SKS}}</td>
+                    <td>{{.Kuota}}</td>
+                    <td>
+                        <form action="/mahasiswa/enroll" method="post" style="display:inline;">
+                            <input type="hidden" name="course_id" value="{{.ID}}">
+                            <button type="submit" {{if eq .Kuota 0}}disabled{{end}}>Ambil</button>
+                        </form>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+
+        <h2>Mata Kuliah Yang Sudah Diambil</h2>
+        <table>
+            <thead>
+                <tr><th>Kode MK</th><th>Nama Mata Kuliah</th><th>SKS</th></tr>
+            </thead>
+            <tbody>
+                {{range .TakenCourses}}
+                <tr>
+                    <td>{{.Course.KodeMK}}</td>
+                    <td>{{.Course.NamaMK}}</td>
+                    <td>{{.Course.SKS}}</td>
+                </tr>
+                {{else}}
+                <tr><td colspan="3">Anda belum mengambil mata kuliah.</td></tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

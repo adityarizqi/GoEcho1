@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login KRS</title>
+    <style>body { font-family: sans-serif; container { max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; } input { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; } button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; } .error { color: red; } }</style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login Sistem KRS</h2>
+        <form action="/login" method="post">
+            <label for="nim">NIM / NIP:</label>
+            <input type="text" id="nim" name="nim" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
