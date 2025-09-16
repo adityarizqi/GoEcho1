@@ -45,6 +45,7 @@ func main() {
 	authHandler := handler.NewAuthHandler(authService)
 	mhsHandler := handler.NewMahasiswaHandler(krsService)
 	dosenHandler := handler.NewDosenHandler(krsService)
+	debugHandler := handler.NewDebugHandler(gormDB)
 
 	// Echo instance
 	e := echo.New()
@@ -75,6 +76,9 @@ func main() {
 	dosenGroup := e.Group("/dosen")
 	dosenGroup.Use(middleware.RoleMiddleware("dosen"))
 	dosenGroup.GET("/dashboard", dosenHandler.ShowDashboard)
+
+	debugGroup := e.Group("/debug")
+	debugGroup.POST("/reseed", debugHandler.ReseedDatabase)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":8080"))
