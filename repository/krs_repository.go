@@ -34,10 +34,9 @@ func (r *krsRepository) GetAllKRS() ([]model.KRS, error) {
 	return krsList, err
 }
 
-// AddCourseToKRS adalah fungsi KRUSIAL untuk riset Anda.
 // Fungsi ini menggunakan transaksi dan row-level lock untuk mencegah race condition.
 func (r *krsRepository) AddCourseToKRS(studentID, courseID uint) error {
-	// Memulai transaksi
+	// Start db transaction
 	return r.db.Transaction(func(tx *gorm.DB) error {
 		var course model.Course
 		// KUNCI: Mengunci baris (row) mata kuliah yang akan diambil.

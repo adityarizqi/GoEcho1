@@ -35,7 +35,7 @@ func (h *MahasiswaHandler) EnrollCourse(c echo.Context) error {
 
 	err = h.krsService.EnrollCourse(userID, uint(courseID))
 	if err != nil {
-		// Di dunia nyata, Anda akan menampilkan error ini dengan lebih baik
+		// Tampilkan pesan error jika terjadi konflik (misal: mata kuliah sudah penuh)
 		return c.String(http.StatusConflict, err.Error())
 	}
 

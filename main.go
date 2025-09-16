@@ -14,7 +14,6 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// Template Renderer
 type Template struct {
 	templates *template.Template
 }
@@ -57,7 +56,6 @@ func main() {
 	e.Renderer = t
 
 	// --- Routes ---
-
 	// Public routes
 	e.GET("/login", authHandler.ShowLoginPage)
 	e.POST("/login", authHandler.Login)
@@ -77,6 +75,7 @@ func main() {
 	dosenGroup.Use(middleware.RoleMiddleware("dosen"))
 	dosenGroup.GET("/dashboard", dosenHandler.ShowDashboard)
 
+	// Debug routes
 	debugGroup := e.Group("/debug")
 	debugGroup.POST("/reseed", debugHandler.ReseedDatabase)
 
