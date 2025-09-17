@@ -46,6 +46,11 @@ func (r *krsRepository) AddCourseToKRS(studentID, courseID uint) error {
 			return errors.New("mata kuliah tidak ditemukan")
 		}
 
+		// Tanpa klausa locking
+		// if err := tx.First(&course, courseID).Error; err != nil {
+		//     return errors.New("mata kuliah tidak ditemukan")
+		// }
+
 		// Cek kuota
 		if course.Kuota <= 0 {
 			return errors.New("kuota mata kuliah sudah habis")
